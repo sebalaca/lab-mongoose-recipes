@@ -49,6 +49,11 @@ mongoose
 
   .then((response) => {
     console.log(`New duration is updated`, response);
+    return Recipe.deleteOne({title: "Carrot Cake"});
+  })
+
+  .then((response) => {
+    console.log(`Carrot Cake deleted`, response);
   })
 
   .catch(error => {
