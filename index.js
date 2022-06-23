@@ -15,11 +15,13 @@ mongoose
     // Before adding any recipes to the database, let's remove all existing ones
     return Recipe.deleteMany()
   })
+
   .then((response) => {
     // console.log(`Primer console`, response)
     // Run your code here, after you have insured that the connection was made
     return Recipe.insertMany(data);
   })
+
   .then((response) => {
     console.log(`InsertMany`, response);
     return Recipe.create(
@@ -35,6 +37,20 @@ mongoose
       }
     )
   })
+
+  .then((response) => {
+    console.log(`New recipe created`, response);
+    return Recipe.findOneAndUpdate(
+      {title: "Rigatoni alla Genovese"},
+      {duration: 100},
+      {new: true}
+    );
+  })
+
+  .then((response) => {
+    console.log(`New duration is updated`, response);
+  })
+
   .catch(error => {
     console.error('Error connecting to the database', error);
   });
