@@ -11,13 +11,32 @@ const MONGODB_URI = 'mongodb://localhost:27017/recipe-app';
 mongoose
   .connect(MONGODB_URI)
   .then(x => {
-    console.log(`Connected to the database: "${x.connection.name}"`);
+    console.log(`Connected to the database: "${x.Model.create}"`);
     // Before adding any recipes to the database, let's remove all existing ones
     return Recipe.deleteMany()
   })
-  .then(() => {
+  .then((response) => {
+    // console.log(`Primer console`, response)
     // Run your code here, after you have insured that the connection was made
+    return Recipe.insertMany(data);
+  })
+  .then((response) => {
+    console.log(`InsertMany`, response);
+    return Recipe.create(
+      {
+        title: "Fried Eggs",
+        level: "Easy Peasy",
+        ingredients: ["eggs", "salt", "Olive Oil"],
+        cuisine: "International",
+        dishType: "breakfast",
+        duration: 20,
+        creator: "Ruperto Gonzalez",
+        created: "10/01/2005"
+      }
+    )
   })
   .catch(error => {
     console.error('Error connecting to the database', error);
   });
+
+  
