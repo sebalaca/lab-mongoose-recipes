@@ -17,7 +17,7 @@ mongoose
   })
 
   .then((response) => {
-    // console.log(`Primer console`, response)
+    console.log(`Primer console`, response)
     // Run your code here, after you have insured that the connection was made
     return Recipe.insertMany(data);
   })
@@ -54,6 +54,7 @@ mongoose
 
   .then((response) => {
     console.log(`Carrot Cake deleted`, response);
+    mongoose.connection.close();
   })
 
   .catch(error => {
